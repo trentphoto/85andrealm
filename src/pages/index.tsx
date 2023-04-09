@@ -7,10 +7,17 @@ import Stars from '@/components/Stars'
 import { FaCalendarAlt, FaPenSquare } from 'react-icons/fa'
 import { fetchProducts } from '@/lib/fetchProducts'
 import { Product } from '@/types/types'
+import ItemCard from '@/components/ItemCard'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({ products }: { products: Product[] }) {
+
+  // data
+  const newArrivals = products.filter(product => product.category_id === 2).splice(0, 4);
+  const weddingFeatured = products.filter(product => product.category_id === 1).splice(0, 4);
+
+  // components
 
   const HomeHero = () => (
     <>
@@ -30,17 +37,6 @@ export default function Home({ products }: { products: Product[] }) {
             </div>
         </section>
     </>
-  )
-
-  const ItemCard: React.FC = () => (
-    <div className="relative overflow-hidden flex flex-col items-stretch">
-      <Image src="https://res.cloudinary.com/dakfmjumy/image/upload/v1681004007/realm/products/roses/bouquet-of-roses-2021-08-26-16-31-28-utc_copy_1_rfkyhu.jpg" alt="rose" width={1000} height={1000} className='' />
-      <div className="p-4 flex flex-col items-center justify-start text-center gap-2">
-        <h3 className="h4">Roses</h3>
-        <Stars rating={5} />
-        <div className="font-bold">$302.20</div>
-      </div>
-    </div>
   )
 
   const BlogCard: React.FC = () => (
@@ -144,10 +140,11 @@ export default function Home({ products }: { products: Product[] }) {
             <Link href="/shop">Plants</Link>
           </div>
           <div className="grid grid-cols-4 gap-3">
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
+            {
+              weddingFeatured.map((product) => (
+                <ItemCard key={product.id} product={product} />
+              ))
+            }
           </div>
         </div>
       </section>
@@ -157,10 +154,11 @@ export default function Home({ products }: { products: Product[] }) {
         <div className="container relative">
           <h2 className='text-center mb-8'>Newest Arrivals</h2>
           <div className="grid grid-cols-4 gap-3">
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
+            {
+              newArrivals.map((product) => (
+                <ItemCard key={product.id} product={product} />
+              ))
+            }
           </div>
         </div>
       </section>
