@@ -4,11 +4,13 @@ import Layout from '@/components/layout/Layout'
 import ButtonLink from '@/components/ButtonLink'
 import Link from 'next/link'
 import Stars from '@/components/Stars'
-import { FaCalendar, FaCalendarAlt, FaPenSquare } from 'react-icons/fa'
+import { FaCalendarAlt, FaPenSquare } from 'react-icons/fa'
+import { fetchProducts } from '@/lib/fetchProducts'
+import { Product } from '@/types/types'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Home({ products }: { products: Product[] }) {
 
   const HomeHero = () => (
     <>
@@ -30,7 +32,7 @@ export default function Home() {
     </>
   )
 
-  const ItemCard = () => (
+  const ItemCard: React.FC = () => (
     <div className="relative overflow-hidden flex flex-col items-stretch">
       <Image src="https://res.cloudinary.com/dakfmjumy/image/upload/v1681004007/realm/products/roses/bouquet-of-roses-2021-08-26-16-31-28-utc_copy_1_rfkyhu.jpg" alt="rose" width={1000} height={1000} className='' />
       <div className="p-4 flex flex-col items-center justify-start text-center gap-2">
@@ -41,7 +43,7 @@ export default function Home() {
     </div>
   )
 
-  const BlogCard = () => (
+  const BlogCard: React.FC = () => (
     <div className="relative overflow-hidden flex flex-col items-stretch">
       <Image src="https://res.cloudinary.com/dakfmjumy/image/upload/v1680924490/realm/products/roses/close-up-of-a-beautiful-bouquet-of-white-and-yello-2021-09-01-09-43-36-utc_1_vb4mfl.jpg" alt="basket" width={1000} height={1000} className='' />
       <div className="p-4 flex flex-col items-start justify-start gap-2">
@@ -64,9 +66,10 @@ export default function Home() {
       </div>
     </div>
   )
-    
+
   return (
     <Layout>
+      <pre>{JSON.stringify(products)}</pre>
       <HomeHero />
       <section className="p-4 py-24">
         <div className="container grid grid-cols-3 gap-4 mb-4">
@@ -186,12 +189,19 @@ export default function Home() {
             <p><span className='font-bold'>Lauren</span>, customer</p>
           </div>
 
-
         </div>
       </section>
-
-
       
     </Layout>
   )
+}
+
+export const getServerSideProps = async (context: any) => {
+  const baseUrl = context.req ? `http://${context.req.headers.host}` : '';
+  const products = await fetchProducts(baseUrl);
+  return {
+      props: {
+          products,
+      },
+  };
 }
