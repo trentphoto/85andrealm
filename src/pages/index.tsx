@@ -2,16 +2,16 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import Layout from '@/components/layout/Layout'
 import ButtonLink from '@/components/ButtonLink'
-import Link from 'next/link'
-import Stars from '@/components/Stars'
 import { FaCalendarAlt, FaPenSquare } from 'react-icons/fa'
-import { fetchProducts } from '@/lib/fetchProducts'
-import { Product } from '@/types/types'
+import { fetchCategories, fetchPosts, fetchProducts, fetchTestimonials } from '@/lib/fetchFunctions'
+import { BlogPost, Product, Testimonial } from '@/types/types'
 import ItemCard from '@/components/ItemCard'
+import BrowseByCategorySection from '@/components/BrowseByCategorySection'
+import BlogCard from '@/components/BlogCard'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home({ products }: { products: Product[] }) {
+export default function Home({ products, testimonial, posts }: { products: Product[], testimonial: Testimonial, posts: BlogPost[] }) {
 
   // data
   const newArrivals = products.filter(product => product.category_id === 2).splice(0, 4);
@@ -39,33 +39,8 @@ export default function Home({ products }: { products: Product[] }) {
     </>
   )
 
-  const BlogCard: React.FC = () => (
-    <div className="relative overflow-hidden flex flex-col items-stretch">
-      <Image src="https://res.cloudinary.com/dakfmjumy/image/upload/v1680924490/realm/products/roses/close-up-of-a-beautiful-bouquet-of-white-and-yello-2021-09-01-09-43-36-utc_1_vb4mfl.jpg" alt="basket" width={1000} height={1000} className='' />
-      <div className="p-4 flex flex-col items-start justify-start gap-2">
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
-            <FaCalendarAlt className="text-gray-400" />
-            <span>July 22nd</span>
-          </div>
-          
-          {/* divider */}
-          <div className="block h-full w-px bg-gray-400" />
-
-          <div className="flex items-center gap-2">
-            <FaPenSquare className="text-gray-400" />
-            <span>By John Doe</span>
-          </div>
-        </div>
-        <h3 className="h4">Blog post title goes here.</h3>
-        <div className="">Description here</div>
-      </div>
-    </div>
-  )
-
   return (
     <Layout>
-      <pre>{JSON.stringify(products)}</pre>
       <HomeHero />
       <section className="p-4 py-24">
         <div className="container grid grid-cols-3 gap-4 mb-4">
@@ -128,26 +103,7 @@ export default function Home({ products }: { products: Product[] }) {
         </div>
       </section>
 
-      <section className="p-4 py-24">
-        <div className="container">
-          <h2 className='text-center mb-8'>Browse by Category</h2>
-          <div className="flex items-center justify-center gap-2 mb-12">
-            <Link href="/shop">New Arrivals</Link>
-            <Link href="/shop">Wedding</Link>
-            <Link href="/shop">Holiday</Link>
-            <Link href="/shop">Spring</Link>
-            <Link href="/shop">Roses</Link>
-            <Link href="/shop">Plants</Link>
-          </div>
-          <div className="grid grid-cols-4 gap-3">
-            {
-              weddingFeatured.map((product) => (
-                <ItemCard key={product.id} product={product} />
-              ))
-            }
-          </div>
-        </div>
-      </section>
+      <BrowseByCategorySection products={products} />
 
       <section className="p-4 py-24 relative">
         <div className="absolute w-full h-1/2 top-0 right-0 left-0 bg-blue-100" />
@@ -167,9 +123,13 @@ export default function Home({ products }: { products: Product[] }) {
         <div className="container">
           <h2 className='text-center mb-8'>From the Blog</h2>
           <div className="grid grid-cols-3 gap-3">
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
+            {
+              posts ? (
+                posts.map((post) => (
+                  <BlogCard key={post.id} post={post} />
+                )) 
+              ) : '' 
+            }
           </div>
         </div>
       </section>
@@ -179,13 +139,17 @@ export default function Home({ products }: { products: Product[] }) {
           <h2 className='text-center mb-8'>What People Are Saying</h2>
           
           {/* testimonial */}
-          <div className="mx-auto flex flex-col items-center gap-2 text-center max-w-xl">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s,</p>
-            <div className="w-24 h-24">
-              <Image src="https://res.cloudinary.com/dakfmjumy/image/upload/v1680994843/realm/site/home-hero-small_1_eqaswy.jpg" alt="testimonial" width={100} height={100} className='w-full h-full object-cover rounded-full' />
-            </div>
-            <p><span className='font-bold'>Lauren</span>, customer</p>
-          </div>
+          {
+            testimonial ? (
+              <div className="mx-auto flex flex-col items-center gap-2 text-center max-w-xl">
+                <p>{testimonial.testimonial}</p>
+                <div className="w-24 h-24">
+                  <Image src="https://xsgames.co/randomusers/avatar.php?g=female" alt="testimonial" width={100} height={100} className='w-full h-full object-cover rounded-full' />
+                </div>
+                <p><span className='font-bold'>{testimonial.customer_name}</span>, customer</p>
+              </div>
+            ) : ''
+          }
 
         </div>
       </section>
@@ -196,10 +160,24 @@ export default function Home({ products }: { products: Product[] }) {
 
 export const getServerSideProps = async (context: any) => {
   const baseUrl = context.req ? `http://${context.req.headers.host}` : '';
+
   const products = await fetchProducts(baseUrl);
+
+  const categories = await fetchCategories(baseUrl);
+  
+  const posts = (await fetchPosts(baseUrl)).splice(0, 3);
+
+  const testimonials = await fetchTestimonials(baseUrl);
+
+  // select a random testimonial
+  const testimonial = testimonials[Math.floor(Math.random() * testimonials.length)];
+
   return {
       props: {
           products,
+          categories,
+          testimonial,
+          posts,
       },
   };
 }

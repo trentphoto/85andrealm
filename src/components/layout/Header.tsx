@@ -8,11 +8,13 @@ export default function Header() {
     <nav>
         <div className="container flex items-center justify-between py-4">
             {/* logo */}
-            <Image src="/svg/logo.svg" width={220} height={90} alt="logo" />
-            <div className="flex items-center">
+            <Link href="/">
+                <Image src="/svg/logo.svg" width={220} height={90} alt="logo" />
+            </Link>
+            <div className="flex items-center gap-1">
                 {
                     mainMenuLinks.map((link, index) => (
-                        <Link href={link.path} key={index} className='text-lg py-2 px-3'>{link.name}</Link>
+                        <Link href={link.path} key={index} className="underlineEffect">{link.name}</Link>
                     ))
                 }
             </div>

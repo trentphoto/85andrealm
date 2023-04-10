@@ -25,12 +25,12 @@ export interface Testimonial {
 
 export interface BlogPost {
   id: number;
+  preview: string;
   title: string;
   content: string;
   author: string;
   image_url: string | null;
   created_at: Date;
-  updated_at: Date;
 }
 
 export interface User {
@@ -42,5 +42,4 @@ export interface User {
   last_name: string | null;
   is_admin: boolean;
   created_at: Date;
-  updated_at: Date;
 }

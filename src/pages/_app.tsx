@@ -1,4 +1,4 @@
-import { fetchProducts } from '@/lib/fetchProducts';
+import { fetchProducts } from '@/lib/fetchFunctions';
 import { setProducts } from '@/lib/productsReducer';
 import store from '@/lib/store';
 import { AppProps } from 'next/app'
