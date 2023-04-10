@@ -28,7 +28,7 @@ export default function BrowseByCategorySection({ products }: { products: Produc
                 <div className="flex items-center justify-center gap-6 mb-12">
                     {
                         featuredCategories.map(category => (
-                            <div onClick={() => handleCategoryClick(category.id)} className={clsx(
+                            <div key={category.id} onClick={() => handleCategoryClick(category.id)} className={clsx(
                                 'underlineEffect cursor-pointer p-2',
                                 selectedCategory === category.id ? 'after:scale-x-100' : ''
                             )}>{category.name}</div>

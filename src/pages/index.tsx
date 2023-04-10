@@ -2,7 +2,6 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import Layout from '@/components/layout/Layout'
 import ButtonLink from '@/components/ButtonLink'
-import { FaCalendarAlt, FaPenSquare } from 'react-icons/fa'
 import { fetchCategories, fetchPosts, fetchProducts, fetchTestimonials } from '@/lib/fetchFunctions'
 import { BlogPost, Product, Testimonial } from '@/types/types'
 import ItemCard from '@/components/ItemCard'
@@ -94,7 +93,7 @@ export default function Home({ products, testimonial, posts }: { products: Produ
               <div></div>
               <div className=''>
                 <p className="smallcaps">Up to 10% off</p>
-                <h2 className='h3'>Happy Mother's Day</h2>
+                <h2 className='h3'>Happy Mother&#39;s Day</h2>
                 <ButtonLink href="/shop" className="mt-6">Explore Collection</ButtonLink>
               </div>
             </div>
