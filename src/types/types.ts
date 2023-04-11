@@ -7,6 +7,7 @@ export interface Product {
   name: string;
   price: number;
   stock: number;
+  quantity?: number | undefined;
 }
 
 export interface Category {

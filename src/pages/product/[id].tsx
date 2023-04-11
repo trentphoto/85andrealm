@@ -7,7 +7,7 @@ import { fetchProduct, fetchProducts } from "@/lib/fetchFunctions";
 import { Product } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaCaretLeft, FaFlagUsa, FaGlobe, FaGlobeAmericas, FaHeart, FaShippingFast } from "react-icons/fa";
 
 export default function BlogSingle({ product, products }: { product: Product, products: Product[] }) {
@@ -17,6 +17,12 @@ export default function BlogSingle({ product, products }: { product: Product, pr
   const handleQuantityChange = (newQuantity: number) => {
     setQuantity(newQuantity);
   }
+
+  // check if product has a quantity assigned. if not, set it to 1
+  useEffect(() => {
+    setQuantity(1);
+  }, [product])
+    
 
   return (
     <Layout>
@@ -57,8 +63,8 @@ export default function BlogSingle({ product, products }: { product: Product, pr
               {
                 product.stock ? (
                   <>
-                    <QuantitySelector quantity={quantity} updateQuantity={handleQuantityChange} stock={product.stock} />
-                    <AddToCartButton product={product} />
+                    <QuantitySelector quantity={quantity} updateQuantity={handleQuantityChange} item={product} />
+                    <AddToCartButton product={product} quantity={quantity} />
                   </>
                 ) : <ButtonLink href="/shop">Back to Shop</ButtonLink>
               }

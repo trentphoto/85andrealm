@@ -1,13 +1,31 @@
+import store, { addToCart, toggle } from "@/lib/redux";
 import { Product } from "@/types/types";
 import clsx from "clsx";
-import Link from "next/link";
-import { IconType } from "react-icons";
-import { FaCartPlus, FaShoppingCart } from "react-icons/fa";
+import { FaCartPlus } from "react-icons/fa";
 
-export default function AddToCartButton({ product }: { product: Product } ) {
+export default function AddToCartButton({ product, quantity }: { product: Product, quantity: number } ) {
+  
+  const handleAddToCart = () => {
+    store.dispatch(addToCart({
+      ...product,
+      quantity: quantity
+    }));
+
+    // smooth scroll to top
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+    // open cart
+    store.dispatch(toggle());
+  }
+
   return (
     <>
         <div 
+            onClick={handleAddToCart}
+            tabIndex={0}
             className={clsx(
                 "cursor-pointer inline-flex items-center justify-center px-12 py-3",
                 "text-lg font-bold tracking-wider",

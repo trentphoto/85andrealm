@@ -1,34 +1,59 @@
-export default function QuantitySelector({ quantity, updateQuantity, stock }: { quantity: number, updateQuantity: Function, stock: number }) {
+import { Product } from "@/types/types";
+import clsx from "clsx";
+
+export default function QuantitySelector({ 
+    item, 
+    quantity, 
+    updateQuantity,
+    variant = "default"
+}: { 
+    item: Product, 
+    quantity: number, 
+    updateQuantity: Function,
+    variant?: "default" | "small"
+}) {
     
     const handleQuantityIncrease = () => {
-        if (quantity < stock) {
-            updateQuantity(quantity + 1);
+        if (quantity < item.stock) {
+            updateQuantity(quantity + 1, item);
         }
     }
     
     const handleQuantityDecrease = () => {
         if (quantity > 1) {
-            updateQuantity(quantity - 1);
+            updateQuantity(quantity - 1, item);
         }
     }
 
   return (
-    <div className="border border-gray-400 py-4 flex items-center bg-white">
+    <div className={clsx(
+        "border border-gray-400 flex items-center bg-white",
+        variant === "default" ? "py-4" : "py-2 h-8"
+    )}>
         
         {/* decrease button */}
-        <button className="text-2xl font-bold text-gray-700 px-8" onClick={() => handleQuantityDecrease()}>-</button>
+        <button className={clsx(
+                'text-2xl font-bold',
+                variant === "default" ? "px-8 text-gray-700" : "px-2 text-gray-500 text-xl"
+            )} onClick={() => handleQuantityDecrease()}>-</button>
         
         {/* divider */}
-        <div className="block h-full w-px bg-gray-400" />
+        <div className="block h-full w-px bg-gray-300" />
         
         {/* quantity label */}
-        <span className="text-lg font-bold text-gray-700 px-8 py-2">{quantity}</span>
+        <span className={clsx(
+            "text-lg font-bold text-gray-700",
+            variant === "default" ? "px-8 py-2" : "px-2 py-1"
+        )}>{quantity}</span>
         
         {/* divider */}
-        <div className="block h-full w-px bg-gray-400" />
+        <div className="block h-full w-px bg-gray-300" />
         
         {/* increase button */}
-        <button className="text-2xl font-bold text-gray-700 px-8" onClick={() => handleQuantityIncrease()}>+</button>
+        <button className={clsx(
+                'text-2xl font-bold',
+                variant === "default" ? "px-8 text-gray-700" : "px-2 text-gray-500 text-xl"
+            )} onClick={() => handleQuantityIncrease()}>+</button>
     </div>
   )
 }

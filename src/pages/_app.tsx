@@ -1,18 +1,15 @@
-import { fetchProducts } from '@/lib/fetchFunctions';
-import { setProducts } from '@/lib/productsReducer';
-import store from '@/lib/store';
+import store from '@/lib/redux';
 import { AppProps } from 'next/app'
-import { Provider } from 'react-redux';
-import { CustomPageContext } from '@/types/customTypes';
 import '@/styles/globals.css'
-import { Product } from '@/types/types';
-import { useEffect, useState } from 'react';
+import { Provider } from 'react-redux'
+
 
 export default function App({ Component, pageProps }: AppProps) {
-
     return (
       <>
+        <Provider store={store}>
           <Component {...pageProps} />
+        </Provider>
       </>
     )
 }
