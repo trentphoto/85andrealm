@@ -6,20 +6,22 @@ import Section from "@/components/layout/Section";
 import { fetchCategories, fetchProducts } from "@/lib/fetchFunctions";
 import { Category, Product } from "@/types/types";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function ShopPage({ products, categories }: { products: Product[], categories: Category[] }) {
     
     const [checkedCategories, setCheckedCategories] = useState<number[]>([]);
 
+    const [sortMethod, setSortMethod] = useState<string>('featured');
+
     const handleCategoryChange = (id: number) => {
         // check if the category is already in the array
         if (checkedCategories.includes(id)) {
             // if so, remove it
-            setCheckedCategories(checkedCategories.filter(category => category !== id));
+            setCheckedCategories((prevCategories) => prevCategories.filter(category => category !== id));
         } else {
             // if not, add it
-            setCheckedCategories([...checkedCategories, id]);
+            setCheckedCategories(prevCategories => [...prevCategories, id]);
         }
     }
 
@@ -27,7 +29,28 @@ export default function ShopPage({ products, categories }: { products: Product[]
         setCheckedCategories([]);
     }
 
-    const productsToShow = checkedCategories.length === 0 ? products : products.filter(product => checkedCategories.includes(product.category_id));
+    const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setSortMethod(e.target.value);
+    }
+
+    const productsToShow = products.filter(prod => {
+        // if there are no checked categories, show all products
+        if (checkedCategories.length === 0) {
+            return true;
+        }
+        // if there are checked categories, only show products that match the checked categories
+        return checkedCategories.includes(prod.category_id);
+    }).sort((a, b) => {
+        // sort the products based on the sort method
+        if (sortMethod === 'featured') {
+            return 0;
+        } else if (sortMethod === 'lowToHigh') {
+            return a.price - b.price;
+        } else if (sortMethod === 'highToLow') {
+            return b.price - a.price;
+        }
+        return 0;
+    });
 
     return (
         <>
@@ -56,10 +79,13 @@ export default function ShopPage({ products, categories }: { products: Product[]
                 <Section className="pb-12 bg-blue-50">
                     <div className="container py-16 flex justify-between">
                         <p>Showing {productsToShow.length.toString()} results</p>
-                        <select name="test1" id="test1">
-                            <option value="test1">Featured</option>
-                            <option value="test2">Price: Low to High</option>
-                            <option value="test3">Price: High to Low</option>
+                        <div className="flex gap-2">
+                            <p>sort method: { sortMethod }</p>
+                        </div>
+                        <select name="test1" id="test1" onChange={handleSortChange}>
+                            <option value="featured">Featured</option>
+                            <option value="lowToHigh">Price: Low to High</option>
+                            <option value="highToLow">Price: High to Low</option>
                         </select>
                     </div>
 
@@ -83,8 +109,8 @@ export default function ShopPage({ products, categories }: { products: Product[]
                             <div className="flex flex-col gap-4">
                                 
                                 {
-                                    products ? (
-                                        productsToShow.map((product: Product) => ( <ProductListItem key={product.id} product={product} /> ))
+                                    productsToShow ? (
+                                        productsToShow.map((item: Product) => ( <ProductListItem key={item.id} product={item} /> ))
                                     ) : ''
                                 }
 
