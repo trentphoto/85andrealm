@@ -36,8 +36,8 @@ export default function BlogSingle({ product, products }: { product: Product, pr
             </Link>
         </div>
         
-        <div className="container grid grid-cols-1 sm:grid-cols-12 gap-16">
-          <div className="col-span-5">
+        <div className="container block md:grid grid-cols-12 gap-16">
+          <div className="col-span-12 md:col-span-5">
             <Image 
               src={product.image_url}
               alt={product.name}
@@ -45,7 +45,7 @@ export default function BlogSingle({ product, products }: { product: Product, pr
               height={500}
             />
           </div>
-          <div className="col-span-7 flex flex-col gap-3 items-start">
+          <div className="col-span-12 md:col-span-7 flex flex-col gap-3 items-start">
             <h1 className="">{product.name}</h1>
 
             {/* price and stock info */}
@@ -58,7 +58,7 @@ export default function BlogSingle({ product, products }: { product: Product, pr
 
             <p className="mb-20">{product.description}</p>
 
-            <div className="flex flex-col sm:flex-row gap-2">
+            <div className="flex flex-col lg:flex-row gap-2">
             
               {
                 product.stock ? (
@@ -72,7 +72,7 @@ export default function BlogSingle({ product, products }: { product: Product, pr
             </div>
 
             {/* add to favorites button */}
-            <div className="flex items-center gap-2 px-6 py-3 mb-12 rounded-full cursor-pointer hover:bg-gray-50">
+            <div className="flex items-center gap-2 px-6 py-3 mb-0 rounded-full cursor-pointer hover:bg-gray-50">
               <FaHeart className="text-2xl text-pink-200 hover:text-pink-500" />
               <span>Add to Favorites</span>
             </div>
@@ -107,7 +107,7 @@ export default function BlogSingle({ product, products }: { product: Product, pr
       <section className="p-4 py-24 bg-gray-50">
           <div className="container">
               <h2 className='text-center mb-12'>More in This Category</h2>
-              <div className="grid grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {
                   products ? products.filter(item => item.category_id === product.category_id && item.id !== product.id).splice(0,4).map((item) => (
                       <ItemCard key={item.id} product={item} />

@@ -27,7 +27,7 @@ export default function AddToCartButton({ product, quantity }: { product: Produc
             onClick={handleAddToCart}
             tabIndex={0}
             className={clsx(
-                "cursor-pointer inline-flex items-center justify-center px-12 py-3",
+                "shrink-0 cursor-pointer inline-flex items-center justify-center px-12 py-3",
                 "text-lg font-bold tracking-wider",
                 "bg-green-600 text-white hover:bg-green-700 active:bg-green-600"
             )}
