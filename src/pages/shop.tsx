@@ -2,6 +2,7 @@ import ButtonLink from "@/components/ButtonLink";
 import ProductListItem from "@/components/ProductListItem";
 import SidebarCategoryItem from "@/components/SidebarCategoryItem";
 import Layout from "@/components/layout/Layout";
+import Section from "@/components/layout/Section";
 import { fetchCategories, fetchProducts } from "@/lib/fetchFunctions";
 import { Category, Product } from "@/types/types";
 import Image from "next/image";
@@ -32,7 +33,7 @@ export default function ShopPage({ products, categories }: { products: Product[]
         <>
             <Layout>
                 {/* hero jumbo card */}
-                <section className="p-4 relative">
+                <Section className="py-4 relative">
                     <div className="absolute w-full h-1/2 bottom-0 right-0 left-0 bg-blue-50" />
                     <div className="container">
                         <div className="col-span-3 md:col-span-2 relative overflow-hidden">
@@ -49,10 +50,10 @@ export default function ShopPage({ products, categories }: { products: Product[]
                             </div>
                         </div>
                     </div>
-                </section>
+                </Section>
 
                 {/* main products list */}
-                <section className="pb-12 bg-blue-50">
+                <Section className="pb-12 bg-blue-50">
                     <div className="container py-16 flex justify-between">
                         <p>Showing {productsToShow.length.toString()} results</p>
                         <select name="test1" id="test1">
@@ -92,7 +93,7 @@ export default function ShopPage({ products, categories }: { products: Product[]
                             
                         </div>
                     </div>
-                </section>
+                </Section>
 
             </Layout>
         </>

@@ -7,6 +7,7 @@ import { BlogPost, Product, Testimonial } from '@/types/types'
 import ItemCard from '@/components/ItemCard'
 import BrowseByCategorySection from '@/components/BrowseByCategorySection'
 import BlogCard from '@/components/BlogCard'
+import Section from '@/components/layout/Section'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -41,7 +42,7 @@ export default function Home({ products, testimonial, posts }: { products: Produ
   return (
     <Layout>
       <HomeHero />
-      <section className="p-4 py-24">
+      <Section className="p-4 py-24">
         <div className="container grid grid-cols-3 gap-4 mb-4">
 
           {/* card 1 */}
@@ -100,11 +101,11 @@ export default function Home({ products, testimonial, posts }: { products: Produ
           </div>
 
         </div>
-      </section>
+      </Section>
 
       <BrowseByCategorySection products={products} />
 
-      <section className="p-4 py-24 relative">
+      <Section className="p-4 py-24 relative">
         <div className="absolute w-full h-1/2 top-0 right-0 left-0 bg-blue-100" />
         <div className="container relative">
           <h2 className='text-center mb-8'>Newest Arrivals</h2>
@@ -116,9 +117,9 @@ export default function Home({ products, testimonial, posts }: { products: Produ
             }
           </div>
         </div>
-      </section>
+      </Section>
 
-      <section className="p-4 py-24 relative">
+      <Section className="py-24 relative">
         <div className="container">
           <h2 className='text-center mb-8'>From the Blog</h2>
           <div className="grid grid-cols-3 gap-3">
@@ -131,9 +132,9 @@ export default function Home({ products, testimonial, posts }: { products: Produ
             }
           </div>
         </div>
-      </section>
+      </Section>
 
-      <section className="p-4 py-24 relative">
+      <Section className="py-24 relative">
         <div className="container">
           <h2 className='text-center mb-8'>What People Are Saying</h2>
           
@@ -151,7 +152,7 @@ export default function Home({ products, testimonial, posts }: { products: Produ
           }
 
         </div>
-      </section>
+      </Section>
       
     </Layout>
   )

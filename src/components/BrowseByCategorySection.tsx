@@ -22,7 +22,7 @@ export default function BrowseByCategorySection({ products }: { products: Produc
         setSelectedCategory(id)
     }
     return (
-        <section className="p-4 py-24">
+        <section className="px-4 p-4 py-24">
             <div className="container">
                 <h2 className='text-center mb-8'>Browse by Category</h2>
                 <div className="flex items-center justify-center gap-6 mb-12">

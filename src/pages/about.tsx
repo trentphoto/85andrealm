@@ -1,10 +1,11 @@
 import ButtonLink from "@/components/ButtonLink";
 import Layout from "@/components/layout/Layout";
+import Section from "@/components/layout/Section";
 
 export default function AboutPage() {
   return (
     <Layout>
-        <section className="px-4 md:px-12 py-20">
+        <Section className="py-20">
             <div className="container">
                 <h1 className="h1 font-bold mb-4">About 85 + REALM</h1>
                 <div className="text-gray-500">
@@ -15,7 +16,7 @@ export default function AboutPage() {
                 </div>
                 <ButtonLink href="/shop" className="mt-12">View our Incredible Product Lineup</ButtonLink>
             </div>
-        </section>
+        </Section>
     </Layout>
   )
 }

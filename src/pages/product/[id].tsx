@@ -3,6 +3,7 @@ import ButtonLink from "@/components/ButtonLink";
 import ItemCard from "@/components/ItemCard";
 import QuantitySelector from "@/components/QuantitySelector";
 import Layout from "@/components/layout/Layout";
+import Section from "@/components/layout/Section";
 import { fetchProduct, fetchProducts } from "@/lib/fetchFunctions";
 import { Product } from "@/types/types";
 import Image from "next/image";
@@ -26,7 +27,7 @@ export default function BlogSingle({ product, products }: { product: Product, pr
 
   return (
     <Layout>
-      <section className="p-4 py-20">
+      <Section className="py-20">
         
         {/* back button */}
         <div className="container">
@@ -101,10 +102,10 @@ export default function BlogSingle({ product, products }: { product: Product, pr
 
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* related products */}
-      <section className="p-4 py-24 bg-gray-50">
+      <Section className="py-24 bg-gray-50">
           <div className="container">
               <h2 className='text-center mb-12'>More in This Category</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -115,7 +116,7 @@ export default function BlogSingle({ product, products }: { product: Product, pr
               }
               </div>
           </div>
-      </section>
+      </Section>
     </Layout>
   )
 }

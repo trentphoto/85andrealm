@@ -1,5 +1,6 @@
 import BlogCard from "@/components/BlogCard";
 import Layout from "@/components/layout/Layout";
+import Section from "@/components/layout/Section";
 import { fetchPost, fetchPosts } from "@/lib/fetchFunctions";
 import { BlogPost } from "@/types/types";
 import Image from "next/image";
@@ -9,7 +10,7 @@ import { FaCalendarAlt, FaCaretLeft, FaPenSquare } from "react-icons/fa";
 export default function BlogSingle({ post, posts }: { post: BlogPost, posts: BlogPost[] }) {
   return (
     <Layout>
-      <section className="p-8 py-20">
+      <Section className="py-20">
 
         {/* back button */}
         <div className="container">
@@ -59,10 +60,10 @@ export default function BlogSingle({ post, posts }: { post: BlogPost, posts: Blo
             <div dangerouslySetInnerHTML={{ __html: post.content }} />
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* more posts */}
-      <section className="p-4 py-24 bg-gray-50">
+      <Section className="py-24 bg-gray-50">
           <div className="container">
               <h2 className='text-center mb-12'>More Posts</h2>
               <div className="grid md:grid-cols-3 gap-3">
@@ -75,7 +76,7 @@ export default function BlogSingle({ post, posts }: { post: BlogPost, posts: Blo
               }
               </div>
           </div>
-      </section>
+      </Section>
     </Layout>
   )
 }
