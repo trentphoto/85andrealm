@@ -79,10 +79,7 @@ export default function ShopPage({ products, categories }: { products: Product[]
                 <Section className="pb-12 bg-blue-50">
                     <div className="container py-16 flex justify-between">
                         <p>Showing {productsToShow.length.toString()} results</p>
-                        <div className="flex gap-2">
-                            <p>sort method: { sortMethod }</p>
-                        </div>
-                        <select name="test1" id="test1" onChange={handleSortChange}>
+                        <select className="p-3" name="test1" id="test1" onChange={handleSortChange}>
                             <option value="featured">Featured</option>
                             <option value="lowToHigh">Price: Low to High</option>
                             <option value="highToLow">Price: High to Low</option>
