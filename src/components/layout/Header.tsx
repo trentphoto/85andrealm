@@ -11,7 +11,7 @@ export default function Header() {
     const cartIsOpen = useSelector((state: IState) => state.ui)
     return (
         <>
-            <nav className='w-full'>
+            <nav className='w-full relative z-30'>
                 <div className="container flex items-center justify-between px-4 py-4">
                     {/* logo */}
                     <Link href="/" className='w-40 lg:w-60'>
@@ -25,7 +25,7 @@ export default function Header() {
                         }
                     </div>
                     <div className="flex items-center gap-0.5">
-                        <div className="md:hidden">
+                        <div className="md:hidden relative">
                             <MobileMenu />
                         </div>
                         <Link href="/profile">

@@ -44,6 +44,7 @@ export default function ProductSingle({ product, products }: { product: Product,
               alt={product.name}
               width={500}
               height={500}
+              priority 
             />
           </div>
           <div className="col-span-12 md:col-span-7 flex flex-col gap-3 items-start">

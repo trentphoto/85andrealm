@@ -64,7 +64,14 @@ export default function ShopPage({ products, categories }: { products: Product[]
                         <div className="col-span-3 md:col-span-2 relative overflow-hidden">
                             <div className="absolute w-full h-full top-0 right-0 bottom-0 left-0 bg-white/75 z-10 sm:hidden" />
                             <div className="absolute w-full h-full top-0 right-0 bottom-0 left-0 flex items-center justify-center">
-                                <Image src="https://res.cloudinary.com/dakfmjumy/image/upload/v1680999775/realm/site/lavender_tu2ur8.jpg" alt="lavender" width={1800} height={600} className='w-full h-full object-cover' />
+                                <Image 
+                                    src="https://res.cloudinary.com/dakfmjumy/image/upload/v1680999775/realm/site/lavender_tu2ur8.jpg" 
+                                    alt="lavender" 
+                                    width={1800} 
+                                    height={600} 
+                                    className='w-full h-full object-cover' 
+                                    priority
+                                />
                             </div>
                             <div className="relative p-8 py-20 sm:grid grid-cols-2">
                                 <div></div>

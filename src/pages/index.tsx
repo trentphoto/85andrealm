@@ -23,7 +23,14 @@ export default function Home({ products, testimonial, posts }: { products: Produ
     <>
         <section className="relative w-full h-[calc(100vh-122px)] overflow-hidden p-4">
             <div className="absolute inset-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-              <Image src="https://res.cloudinary.com/dakfmjumy/image/upload/v1680994843/realm/site/home-hero-small_1_eqaswy.jpg" alt="hero" width={1800} height={1200} className='w-full h-full object-cover -scale-x-100 md:scale-x-100' />
+              <Image 
+                src="https://res.cloudinary.com/dakfmjumy/image/upload/v1680994843/realm/site/home-hero-small_1_eqaswy.jpg" 
+                alt="hero" 
+                width={1800} 
+                height={1200} 
+                className='w-full h-full object-cover -scale-x-100 md:scale-x-100' 
+                priority
+              />
             </div>
             <div className="relative container">
                 <div className="h-screen grid md:grid-cols-2">

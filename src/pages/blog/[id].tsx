@@ -37,7 +37,9 @@ export default function BlogSingle({ post, posts }: { post: BlogPost, posts: Blo
                   alt={post.title} 
                   width={700}
                   height={300}
-                  className="w-full h-full object-cover relative" />
+                  className="w-full h-full object-cover relative" 
+                  priority 
+                  />
               </div>
             ) : ''
           }
