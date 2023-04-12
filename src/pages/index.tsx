@@ -21,16 +21,17 @@ export default function Home({ products, testimonial, posts }: { products: Produ
 
   const HomeHero = () => (
     <>
-        <section className="relative w-full h-[calc(100vh-122px)] overflow-hidden">
+        <section className="relative w-full h-[calc(100vh-122px)] overflow-hidden p-4">
             <div className="absolute inset-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-              <Image src="https://res.cloudinary.com/dakfmjumy/image/upload/v1680994843/realm/site/home-hero-small_1_eqaswy.jpg" alt="hero" width={1800} height={1200} />
+              <Image src="https://res.cloudinary.com/dakfmjumy/image/upload/v1680994843/realm/site/home-hero-small_1_eqaswy.jpg" alt="hero" width={1800} height={1200} className='w-full h-full object-cover -scale-x-100 md:scale-x-100' />
             </div>
             <div className="relative container">
                 <div className="h-screen grid md:grid-cols-2">
-                  <div></div>
+                  <div className='hidden md:block' />
                   <div className="flex flex-col items-start justify-start mt-40">
-                    <h1 className="h0">New Collections</h1>
-                    <div className="smallcaps text-xl mt-4">A Perfect Bouquet</div>
+                    <div className="smallcaps text-md mt-4">A Perfect Bouquet</div>
+                    <h1 className="text-6xl xl:text-8xl">New Collections</h1>
+                    <div className="font-bold text-md mt-4">Explore Our Finest Floral Arrangements.</div>
                     <ButtonLink href="/shop" className="mt-6">Shop Now</ButtonLink>
                   </div>
                 </div>
@@ -106,10 +107,10 @@ export default function Home({ products, testimonial, posts }: { products: Produ
       <BrowseByCategorySection products={products} />
 
       <Section className="p-4 py-24 relative">
-        <div className="absolute w-full h-1/2 top-0 right-0 left-0 bg-blue-100" />
+        <div className="absolute w-full h-full lg:h-1/2 top-0 right-0 left-0 bg-blue-100" />
         <div className="container relative">
           <h2 className='text-center mb-8'>Newest Arrivals</h2>
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {
               newArrivals.map((product) => (
                 <ItemCard key={product.id} product={product} />
@@ -122,7 +123,7 @@ export default function Home({ products, testimonial, posts }: { products: Produ
       <Section className="py-24 relative">
         <div className="container">
           <h2 className='text-center mb-8'>From the Blog</h2>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="block sm:grid grid-cols-2 lg:grid-cols-3 gap-3">
             {
               posts ? (
                 posts.map((post) => (

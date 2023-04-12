@@ -7,14 +7,17 @@ interface BlogCardProps {
     post: BlogPost;
 }
 
-const BlogCard: React.FC<BlogCardProps> = ({ post }) => (
-    <Link href={`/blog/${post.id}`} className="relative overflow-hidden flex flex-col items-stretch">
+const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
+  const date = new Date(post.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+  
+  return (
+    <Link href={`/blog/${post.id}`} className="relative overflow-hidden flex flex-col items-stretch max-w-md mx-auto">
       <Image src={post.image_url ? post.image_url : '/svg/blank.svg'} alt="basket" width={1000} height={1000} className='' />
       <div className="p-4 flex flex-col items-start justify-start gap-2">
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-2 lg:gap-6 text-sm">
           <div className="flex items-center gap-2">
-            <FaCalendarAlt className="text-gray-400" />
-            <span>July 22nd</span>
+            <FaCalendarAlt className="text-xl text-gray-400" />
+            <span className="smallcaps">{date}</span>
           </div>
           
           {/* divider */}
@@ -22,7 +25,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => (
 
           <div className="flex items-center gap-2">
             <FaPenSquare className="text-gray-400" />
-            <span>By {post.author}</span>
+            <span className="text-gray-500">By {post.author}</span>
           </div>
         </div>
         <h3 className="h4">{post.title}</h3>
@@ -30,5 +33,6 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => (
       </div>
     </Link>
 )
+}
 
 export default BlogCard;

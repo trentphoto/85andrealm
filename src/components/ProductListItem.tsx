@@ -8,8 +8,8 @@ export default function ProductListItem({ product }: { product: Product }) {
     const { name, id, description, price, image_url} = product
 
     return (
-        <Link href={`/product/${id}`} key={id} className="relative w-full overflow-hidden flex bg-white border-2 p-8 gap-2 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group">
-            <div className="overflow-hidden w-60 h-60">
+        <Link href={`/product/${id}`} key={id} className="relative w-full overflow-hidden flex flex-col sm:flex-row bg-white border-2 p-8 gap-2 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group">
+            <div className="overflow-hidden w-60 h-60 max-w-full">
                 <Image src={image_url ? image_url : "/svg/blank.svg"} alt={name} width={100} height={100} className="w-full h-full object-cover" />
             </div>
             <div className="p-4 flex flex-col items-start justify-start gap-2">

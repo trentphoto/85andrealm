@@ -25,7 +25,7 @@ export default function BrowseByCategorySection({ products }: { products: Produc
         <section className="px-4 p-4 py-24">
             <div className="container">
                 <h2 className='text-center mb-8'>Browse by Category</h2>
-                <div className="flex items-center justify-center gap-6 mb-12">
+                <div className="flex flex-wrap items-center justify-center gap-6 mb-12">
                     {
                         featuredCategories.map(category => (
                             <div key={category.id} onClick={() => handleCategoryClick(category.id)} className={clsx(
@@ -35,7 +35,7 @@ export default function BrowseByCategorySection({ products }: { products: Produc
                         ))
                     }
                 </div>
-                <div className="grid grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                 {
                     products ? productsToShow.map((product) => (
                         <ItemCard key={product.id} product={product} />

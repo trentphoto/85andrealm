@@ -47,7 +47,7 @@ export default function ProductSingle({ product, products }: { product: Product,
             />
           </div>
           <div className="col-span-12 md:col-span-7 flex flex-col gap-3 items-start">
-            <h1 className="">{product.name}</h1>
+            <h1 className="mt-8 md:mt-0">{product.name}</h1>
 
             {/* price and stock info */}
             <div className="flex items-center gap-4">
@@ -57,7 +57,7 @@ export default function ProductSingle({ product, products }: { product: Product,
               <p className="text-gray-400 uppercase text-sm tracking-wider">{product.stock > 10 ? "In Stock" : product.stock > 1 ? `Only ${product.stock} left!` : "Out of Stock"}</p>
             </div>
 
-            <p className="mb-20">{product.description}</p>
+            <p className="mt-4 mb-12">{product.description}</p>
 
             <div className="flex flex-col lg:flex-row gap-2">
             

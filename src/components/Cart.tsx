@@ -32,7 +32,9 @@ export default function Cart() {
             <div className="z-50 absolute inset-0 overflow-hidden w-screen h-screen bg-transparent">
                 <div className="absolute z-20 inset-0 w-full h-full overflow-hidden" onClick={toggleCart}></div>
                 <div className="container relative z-50">
-                    <div className="absolute top-24 right-4 w-96 bg-white shadow-[0_0_50px_-12px_rgba(0,0,0,0.25)] flex flex-col">
+
+                    {/* cart div */}
+                    <div className="absolute top-24 right-1 sm:right-4 w-96 max-w-full bg-white shadow-[0_0_50px_-12px_rgba(0,0,0,0.25)] flex flex-col">
                         {/* top row */}
                         <div className="flex justify-between items-center p-4 border-b border-b-gray-200">
                             <div>

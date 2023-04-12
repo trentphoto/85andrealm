@@ -8,9 +8,12 @@ import Link from "next/link";
 import { FaCalendarAlt, FaCaretLeft, FaPenSquare } from "react-icons/fa";
 
 export default function BlogSingle({ post, posts }: { post: BlogPost, posts: BlogPost[] }) {
+
+  const date = new Date(post.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+
   return (
     <Layout>
-      <Section className="py-20">
+      <Section className="py-20 px-8">
 
         {/* back button */}
         <div className="container">
@@ -39,20 +42,20 @@ export default function BlogSingle({ post, posts }: { post: BlogPost, posts: Blo
             ) : ''
           }
 
-          <h1 className="text-center">{post.title}</h1>
+          <h1 className="md:text-center">{post.title}</h1>
 
-          <div className="flex items-center gap-6 w-full justify-center p-8">
+          <div className="flex flex-col md:flex-row md:items-center gap-6 w-full md:justify-center py-8">
             <div className="flex items-center gap-2">
-              <FaCalendarAlt className="text-xl text-gray-400" />
-              <span className="smallcaps">July 22nd</span>
+              <FaCalendarAlt className="text-xl text-gray-400 shrink-0" />
+              <span className="smallcaps text-gray-500">{ date }</span>
             </div>
             
             {/* divider */}
-            <div className="block h-6 w-0.5 bg-gray-400" />
+            <div className="hidden md:block h-6 w-0.5 bg-gray-400" />
 
             <div className="flex items-center gap-2">
-              <FaPenSquare className="text-xl text-gray-400" />
-              <span className="smallcaps">By {post.author}</span>
+              <FaPenSquare className="text-xl text-gray-400 shrink-0" />
+              <span className="smallcaps text-gray-500">By {post.author}</span>
             </div>
           </div>
 

@@ -11,7 +11,7 @@ export default function BlogPage({ posts }: { posts: BlogPost[] }) {
             <section className="p-4 py-24 relative">
                 <div className="container">
                 <h1 className='h0 text-center mb-16'>Latest Articles</h1>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="flex flex-col sm:grid grid-cols-2 lg:grid-cols-3 gap-3">
                     {
                         posts ? (
                             posts.map((post: BlogPost) => ( <BlogCard key={post.id} post={post} /> ))
