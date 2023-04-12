@@ -1,9 +1,9 @@
-import store, { ICartState, removeFromCart, setCartItemQuantity } from "@/lib/redux";
-import { toggle, decreaseCartItemQuantity, increaseCartItemQuantity } from "@/lib/redux";
+import store, { IState, removeFromCart, setCartItemQuantity } from "@/lib/redux";
+import { toggle } from "@/lib/redux";
 import { useSelector } from "react-redux";
 import { Product } from "@/types/types";
 import Image from "next/image";
-import { FaTrash, FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 import QuantitySelector from "./QuantitySelector";
 
 export default function Cart() {
@@ -12,9 +12,9 @@ export default function Cart() {
         store.dispatch(toggle())
     }
 
-    const cartCount: number = useSelector((state: ICartState) => state.cart.length)
+    const cartCount: number = useSelector((state: IState) => state.cart.length)
 
-    const cartItems: Product[] = useSelector((state: ICartState) => state.cart)
+    const cartItems: Product[] = useSelector((state: IState) => state.cart)
 
     const handleQuantityChange = (newQuantity: number, item: Product) => {
         store.dispatch(setCartItemQuantity({
@@ -29,13 +29,24 @@ export default function Cart() {
 
     return (
         <>
-            <div className="z-50 fixed inset-0 overflow-hidden w-screen h-screen bg-transparent">
+            <div className="z-50 absolute inset-0 overflow-hidden w-screen h-screen bg-transparent">
                 <div className="absolute z-20 inset-0 w-full h-full overflow-hidden" onClick={toggleCart}></div>
                 <div className="container relative z-50">
                     <div className="absolute top-24 right-4 w-96 bg-white shadow-[0_0_50px_-12px_rgba(0,0,0,0.25)] flex flex-col">
                         {/* top row */}
                         <div className="flex justify-between items-center p-4 border-b border-b-gray-200">
-                            <h2 className="text-lg font-medium text-gray-900">Cart ({cartCount})</h2>
+                            <div>
+                                <h2 className="text-lg font-medium text-gray-900">Cart ({cartCount})</h2>
+                                {
+                                    cartCount ? '' : (
+                                        <>
+                                            <p className="text-sm text-gray-400 leading-relaxed">Looks like your cart is empty.</p>
+                                            <p className="text-sm text-gray-400 leading-relaxed">Start by filling it with some items!</p>
+                                        </>
+                                    )
+                                    
+                                }
+                            </div>
                             <div></div>
                         </div>
                         {/* cart items */}
@@ -57,7 +68,7 @@ export default function Cart() {
                                     {/* trash button */}
                                     <div
                                         onClick={() => handleDelete(item)} 
-                                        className="ml-auto flex justify-end p-2 bg-transparent hover:bg-red-50 transition-colors cursor-pointer rounded-lg"
+                                        className="ml-auto flex justify-end p-3 bg-transparent hover:bg-red-50 transition-colors cursor-pointer rounded-lg"
                                     >
                                         <FaTrashAlt className="text-red-600 text-sm" />
                                     </div>

@@ -4,10 +4,10 @@ import { FaBars, FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa'
 import Image from 'next/image'
 import Cart from '../Cart'
 import { useSelector } from 'react-redux'
-import store, { ICartState, toggle } from '@/lib/redux'
+import store, { IState, toggle } from '@/lib/redux'
 
 export default function Header() {
-    const cartIsOpen = useSelector((state: ICartState) => state.ui)
+    const cartIsOpen = useSelector((state: IState) => state.ui)
     return (
         <>
             <nav className='w-full'>
@@ -25,7 +25,9 @@ export default function Header() {
                     </div>
                     <div className="flex items-center gap-0.5">
                         <FaBars className='text-xl text-gray-600 p-4 border border-transparent hover:border-gray-200 cursor-pointer shrink-0 w-12 h-12 block md:hidden' />
-                        <FaUser className='text-xl text-gray-600 p-4 border border-transparent hover:border-gray-200 cursor-pointer shrink-0 w-12 h-12' />
+                        <Link href="/profile">
+                            <FaUser className='text-xl text-gray-600 p-4 border border-transparent hover:border-gray-200 cursor-pointer shrink-0 w-12 h-12' />
+                        </Link>
                         <FaShoppingCart className='text-xl text-gray-600 p-4 border border-transparent hover:border-gray-200 cursor-pointer shrink-0 w-12 h-12' onClick={() => store.dispatch(toggle())} />
                     </div>
                 </div>

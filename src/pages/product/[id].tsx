@@ -1,4 +1,5 @@
 import AddToCartButton from "@/components/AddToCartButton";
+import AddToFavoritesButton from "@/components/AddToFavoritesButton";
 import ButtonLink from "@/components/ButtonLink";
 import ItemCard from "@/components/ItemCard";
 import QuantitySelector from "@/components/QuantitySelector";
@@ -9,9 +10,9 @@ import { Product } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { FaCaretLeft, FaFlagUsa, FaGlobe, FaGlobeAmericas, FaHeart, FaShippingFast } from "react-icons/fa";
+import { FaCaretLeft, FaFlagUsa, FaGlobeAmericas, FaShippingFast } from "react-icons/fa";
 
-export default function BlogSingle({ product, products }: { product: Product, products: Product[] }) {
+export default function ProductSingle({ product, products }: { product: Product, products: Product[] }) {
 
   const [quantity, setQuantity] = useState(1);
 
@@ -23,7 +24,6 @@ export default function BlogSingle({ product, products }: { product: Product, pr
   useEffect(() => {
     setQuantity(1);
   }, [product])
-    
 
   return (
     <Layout>
@@ -73,10 +73,7 @@ export default function BlogSingle({ product, products }: { product: Product, pr
             </div>
 
             {/* add to favorites button */}
-            <div className="flex items-center gap-2 px-6 py-3 mb-0 rounded-full cursor-pointer hover:bg-gray-50">
-              <FaHeart className="text-2xl text-pink-200 hover:text-pink-500" />
-              <span>Add to Favorites</span>
-            </div>
+            <AddToFavoritesButton product={product} />
 
             <div className="flex flex-col items-stretch w-full">
               <div className="flex items-center gap-2">

@@ -1,9 +1,10 @@
 import { createSlice, configureStore, PayloadAction } from '@reduxjs/toolkit'
 import { Product } from '@/types/types';
 
-export interface ICartState {
+export interface IState {
     cart: Product[];
     ui: boolean;
+    favorites: Product[];
 }
 
 const cartSlice = createSlice({
@@ -62,10 +63,32 @@ const uiSlice = createSlice({
 
 export const { toggle } = uiSlice.actions
 
+const favoritesSlice = createSlice({
+    name: 'favorites',
+    initialState: [] as Product[],
+    reducers: {
+        updateFavorites: (state, { payload }: PayloadAction<Product>): Product[] => {
+            // find if the item already exists in favorites
+            const find = state.find((item: Product) => item.id === payload.id)
+
+            if (find) {
+                // if the item exists, remote it 
+                return state.filter((item: Product) => item.id !== payload.id)
+            } else {
+                // if the item does not exist, add the item to favorites
+                return [...state, payload]
+            }
+        },
+    }
+})
+
+export const { updateFavorites } = favoritesSlice.actions
+
 const store = configureStore({
     reducer: {
         cart: cartSlice.reducer,
-        ui: uiSlice.reducer
+        ui: uiSlice.reducer,
+        favorites: favoritesSlice.reducer
     }
 })
 
