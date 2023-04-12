@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@formspree/react": "^2.4.1",
     "@reduxjs/toolkit": "^1.9.3",
     "@types/dotenv": "^8.2.0",
     "@types/pg": "^8.6.6",
